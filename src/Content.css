@@ -1,0 +1,188 @@
+.container {
+    position: relative;
+    height: calc(100% - 60px);
+}
+
+.border {
+    height: 90%;
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid black;
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+    background-color: snow;
+    border: 2px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tabs {
+    height: 100%;
+    width: 25%;
+    background-image: url("paper.jpg");
+    background-size: 100% 100%;
+
+}
+
+button {
+    font-family: papyrus, fantasy;
+    background: transparent;
+    border: none;
+    color: white;
+    text-shadow: 2px 2px black;
+    padding: 10px;
+    text-align: left;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+button:hover {
+    text-shadow: 2px 2px 4px black, -2px 2px 4px black, 2px -2px 4px black, -2px -2px 4px black;
+}
+
+.tabs button:not(:first-child) {
+    padding: 10px 50px;
+    font-size: 1.2rem;
+}
+
+.old-image, .old-text, .new-image, .new-text {
+    position: absolute;
+    border-left: 2px solid gray;
+}
+
+.old-image {
+    top: 0%;
+    left: 25%;
+    width: 75%;
+    height: 50%;
+}
+
+.old-text, .new-image, .new-text {
+    top: 50%;
+    left: 25%;
+}
+
+.old-text, .new-text {
+    background-image: url("paper.jpg");
+    background-size: 100% 100%;
+    padding: 30px;
+    width: calc(75% - 60px);
+    height: calc(50% - 60px);
+}
+
+.new-image {
+    width: 75%;
+    height: 50%;
+}
+
+.old-text {
+    z-index: 1;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}
+
+/* Rings */
+.ring {
+    margin:0 auto;
+    position:absolute;
+    top: 48.5%;
+    width:20px;
+    height:20px;
+    border-top:4px solid black;
+    border-right:4px solid black;
+    border-top-right-radius: 100%;
+    transform: rotateZ(45deg);
+    z-index: 100;
+}
+
+.hole-1, .hole-2 {
+    position: absolute;
+    height: 0px;
+    width: 0px;
+    border: 5px solid black;
+    border-radius: 50%;
+}
+
+.hole-1 {
+    top: -8px;
+    left: -8px;
+}
+
+.hole-2 {
+    bottom: -8px;
+    right: -8px;
+}
+
+/* animations */
+
+/* Rotates around top x to a 90 degree angle and fades out */
+/* This is the animation applied to the original bottom page */
+/* when a button is clicked, pageturner and pageturner 2 are applied to the old-text and new-image respectively */
+.pageturner {
+    animation: pageTurner 1.5s linear;
+    transform-origin: top;
+    animation-fill-mode: forwards;
+    backface-visibility: hidden;
+}
+
+@keyframes pageTurner {
+    0% {
+        transform: rotateX(0deg);
+    }
+    99% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotateX(90deg);
+        opacity: 0;
+    }
+}
+
+/* represents the new image being displayed as soon as a button is clicked */
+/* Starts off transparent */
+.new-image {
+    opacity: 0;
+}
+
+/* Pre-rotate inner div around Y and Z so new image is in correct location after X rotation */
+.rotate {
+    transform: rotateY(180deg) rotateZ(180deg);
+    transform-origin: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* This is the animation applied to the image on the inverse of the bottom page */
+/* Starts off at 90 degrees (invisible from above) and rotates once the old page stops rotating */
+.pageturner2 {
+    opacity: 0;
+    animation: pageTurner2 1.5s linear 1.5s; /* Name duration timing-fxn delay */
+    transform: rotateX(90deg);
+    transform-origin: top;
+    animation-fill-mode: forwards;
+}
+
+@keyframes pageTurner2 {
+    0% {
+        transform: rotateX(90deg);
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotateX(180deg);
+        opacity: 1;
+    }
+}

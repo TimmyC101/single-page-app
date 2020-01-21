@@ -1,0 +1,13 @@
+.header {
+    width: 100%;
+    background-color: gray;
+}
+
+.title, .self {
+    display: inline-block;
+    margin: 10px 50px;
+}
+
+.self {
+    float: right;
+}
